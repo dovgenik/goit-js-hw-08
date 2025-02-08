@@ -69,33 +69,61 @@ function createGalleryItem(arrayImgs) {
   const perentUl = document.querySelector(".gallery");
   perentUl.innerHTML = "";
 
-for (const element of arrayImgs) {
-  const {preview:smallImage, original:largeImage, description:imageDescription} = element;  
+  for (const element of arrayImgs) {
+    const {
+      preview: smallImage,
+      original: largeImage,
+      description: imageDescription,
+    } = element;
 
-//   створив li
-  const liChaild = document.createElement("li");
-  liChaild.class = "gallery-item";
+    //   створив li
+    const liChaild = document.createElement("li");
+    liChaild.classList.add("gallery-item");
+    liChaild.style.width = "360px";
+    liChaild.style.height = "200px";
+    liChaild.style.overflow = "hidden";
+    liChaild.style.transition = "transform 0.3s ease-in-out";
 
-  const aChaild = document.createElement("a");
-  aChaild.class = "gallery-link";
-  aChaild.href = largeImage;
+    const aChaild = document.createElement("a");
+    aChaild.classList.add("gallery-link");
+    aChaild.href = largeImage;
 
-  const imgChaild = document.createElement("img");
-  imgChaild.class = "gallery-image";
-  imgChaild.src = smallImage;
-  imgChaild.alt = imageDescription;
-  imgChaild.dataset.source=largeImage;
+    const imgChaild = document.createElement("img");
+    imgChaild.classList.add("gallery-image");
+    imgChaild.src = smallImage;
+    imgChaild.alt = imageDescription;
+    imgChaild.dataset.source = largeImage;
+    imgChaild.style.maxWidth = "100%";
+    imgChaild.style.objectFit = "cover";
 
     aChaild.appendChild(imgChaild);
     liChaild.appendChild(aChaild);
     fragment.appendChild(liChaild);
-}
+  }
 
   perentUl.appendChild(fragment);
 }
 
+createGalleryItem(images);
 
-createGalleryItem(images)
+document.querySelector(".gallery").addEventListener("mouseover", (event) => {
+  const item = event.target.closest(".gallery-item");
+  if (item) item.style.transform = "scale(1.1)";
+});
+document.querySelector(".gallery").addEventListener("mouseout", (event) => {
+  const item = event.target.closest(".gallery-item");
+  if (item) item.style.transform = "scale(1)";
+});
+
+document.querySelector(".gallery").addEventListener("click", (event) => {
+  const item = event.target.closest(".gallery-image");
+
+  if (item) {
+    event.preventDefault();
+    console.log(item.dataset.source);
+  }
+});
+
 // function createBoxes(amount) {
 //   const fragment = document.createDocumentFragment();
 //   const perentsDiv = document.querySelector("#boxes");
