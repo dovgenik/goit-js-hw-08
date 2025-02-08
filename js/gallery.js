@@ -120,33 +120,9 @@ document.querySelector(".gallery").addEventListener("click", (event) => {
 
   if (item) {
     event.preventDefault();
+    basicLightbox.create(`<img width="1112" height="640" src=${item.dataset.source}>`).show();
     console.log(item.dataset.source);
   }
 });
 
-// function createBoxes(amount) {
-//   const fragment = document.createDocumentFragment();
-//   const perentsDiv = document.querySelector("#boxes");
-//   perentsDiv.innerHTML = "";
 
-//   if (amount > 0) {
-//     for (let index = 0; index < amount; index++) {
-//       const divItem = document.createElement("div");
-
-//       const divChild = document.createElement("h1");
-//       divChild.textContent = String(index + 1);
-//       divChild.style.fontSize = String(16 + index) + "px";
-//       divItem.appendChild(divChild);
-
-//       divItem.style.width = String(30 + 10 * index) + "px";
-//       divItem.style.height = String(30 + 10 * index) + "px";
-//       divItem.style.backgroundColor = getRandomHexColor();
-//       divItem.style.display = "flex";
-//       divItem.style.alignItems = "center";
-//       divItem.style.justifyContent = "center";
-
-//       fragment.appendChild(divItem);
-//     }
-//     perentsDiv.appendChild(fragment);
-//   }
-// }
